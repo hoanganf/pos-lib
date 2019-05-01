@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css/common_style.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo LIB_DIR;?>css/common_style.css">
   <style>
 
   .container {
@@ -29,7 +29,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="images/ic_logo_splash.png">
+    <img src="<?php echo LIB_DIR;?>/images/ic_logo_splash.png">
   </div>
   <div class="center">
     <p class="rounded background-color--yellow"><?php echo $err_message; ?></p>

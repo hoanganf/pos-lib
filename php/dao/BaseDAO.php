@@ -8,20 +8,20 @@ class BaseDAO extends DAO{
   public function getTableName(){
     return $this->tableName;
   }
-  public function getAll($database=null){
-    return $this->getListQuery('SELECT * FROM '.$this->tableName,$database);
+  public function getAll($host=null,$userName=null,$password=null,$database=null){
+    return $this->getListQuery('SELECT * FROM '.$this->tableName,$host,$userName,$password,$database);
   }
-  public function getOnceWhere($query,$database=null){
-    return $this->getRowQuery('SELECT * FROM '.$this->tableName.' WHERE '.$query,$database);
+  public function getOnceWhere($whereClause,$host=null,$userName=null,$password=null,$database=null){
+    return $this->getRowQuery('SELECT * FROM '.$this->tableName.' WHERE '.$whereClause,$host,$userName,$password,$database);
   }
-  public function getAllWhere($query,$database=null){
-    return $this->getListQuery('SELECT * FROM '.$this->tableName.' WHERE '.$query,$database);
+  public function getAllWhere($whereClause,$host=null,$userName=null,$password=null,$database=null){
+    return $this->getListQuery('SELECT * FROM '.$this->tableName.' WHERE '.$whereClause,$host,$userName,$password,$database);
   }
-  public function getAllQuery($query,$database=null){
-    return $this->getListQuery($query,$database);
+  public function getAllQuery($query,$host=null,$userName=null,$password=null,$database=null){
+    return $this->getListQuery($query,$host,$userName,$password,$database);
   }
-  public function getOnceQuery($query,$database=null){
-    return $this->getRowQuery($query,$database);
+  public function getOnceQuery($query,$host=null,$userName=null,$password=null,$database=null){
+    return $this->getRowQuery($query,$host,$userName,$password,$database);
   }
 }
 ?>

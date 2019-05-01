@@ -68,9 +68,9 @@ function uploadImageChange(elem){
   if($this.prop('files')[0] === undefined) return;
   var formData = new FormData();
   formData.append("fileToUpload", $this.prop('files')[0]);
-  formData.append("folder", 'pos');
+  formData.append("folder", $this.data('folder').length > 0 ? $this.data('folder') : 'pos');
   $.ajax({
-      url: "../upload/paste.php",
+      url: "../pos-upload/paste.php",
       type: "POST",
       data : formData,
       processData: false,
@@ -85,7 +85,7 @@ function uploadImageChange(elem){
         console.log(response);
         var jsonResponse=JSON.parse(response);
         if(jsonResponse.status === true){
-          $('img[name=image_displayer]').attr('src','../upload/'+jsonResponse.file_path);
+          $('img[name=image_displayer]').attr('src','../pos-upload/'+jsonResponse.file_path);
           $('input[name=image]').val(jsonResponse.file_path);
         }else{
           if(jsonResponse.code == 306) location.href='../login?from='+location.href;

@@ -1,4 +1,9 @@
 <?php
+include_once LIB_DIR.'php/jwt/BeforeValidException.php';
+include_once LIB_DIR.'php/jwt/ExpiredException.php';
+include_once LIB_DIR.'php/jwt/SignatureInvalidException.php';
+include_once LIB_DIR.'php/jwt/JWT.php';
+
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\ExpiredException;
 class Login{
@@ -65,6 +70,7 @@ BoJGw6Yq3e3+ZasROykv8jLrk=';
            "status" => true,
            "message" => "Successful login.",
            "user_name" =>$decoded->user_name,
+           "role" =>$decoded->role,
            "access_token" => $data->access_token
         ));
       }catch (Exception $exception){
@@ -97,6 +103,7 @@ BoJGw6Yq3e3+ZasROykv8jLrk=';
                     "status"=>true,
                     "message" => "Successful login.",
                     "user_name" => $data->user_name,
+                    "role" =>$data->role,
                     "access_token" => $access_token
                    )
                 );

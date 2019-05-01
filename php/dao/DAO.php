@@ -1,18 +1,6 @@
 <?php
 class DAO{
-  protected static $LOCAL_HOST='localhost';
-  protected static $LOCAL_USER_NAME='root';
-  protected static $LOCAL_PASSWORD='';
-  protected static $LOCAL_DATABASE_NAME='anit_pos';
-
-  protected static $SERVER_HOST='localhost';
-  protected static $SERVER_USER_NAME='root';
-  protected static $SERVER_PASSWORD='';
-  protected static $SERVER_DATABASE_NAME='anit_pos_server';
-
-  protected static $RES_ID=1;
   private $connection=null;
-
   function connect(){
     if($this->connection==null){
       $args = func_get_args();
@@ -29,12 +17,12 @@ class DAO{
           //echo 'case 1 <br/>';
           if($args[0]){
           //  echo $args[0];
-            $this->connection=mysqli_connect(self::$LOCAL_HOST,self::$LOCAL_USER_NAME,self::$LOCAL_PASSWORD,$args[0]);
+            $this->connection=mysqli_connect(HOST,USER_NAME,PASSWORD,$args[0]);
             break;
           }
         default:
         //  echo 'case default <br/>';
-          $this->connection=mysqli_connect(self::$LOCAL_HOST,self::$LOCAL_USER_NAME,self::$LOCAL_PASSWORD,self::$LOCAL_DATABASE_NAME);
+          $this->connection=mysqli_connect(HOST,USER_NAME,PASSWORD,DATABASE_NAME);
       }
       // Check connection
       if (!$this->connection) {
@@ -59,7 +47,7 @@ class DAO{
       default:
         $this->connect();
     }
-    if($args[0]){
+    if(isset($args[0])){
     	$queryResult=mysqli_query($this->connection,$args[0]);
       if(!$queryResult){
         trigger_error("[SQL]:".$args[0]."[Query Error description]: " . mysqli_error($this->connection));
@@ -80,6 +68,8 @@ class DAO{
         default:
           //DO NOTHING;
       }
+    }else{
+      trigger_error("[Query Error description]: No SQL query");
     }
   }
   public function getLastInsertId(){
@@ -115,14 +105,14 @@ class DAO{
     return $data;
   }*/
 
-  public function getListQuery($sql,$database){
+  public function getListQuery($sql,$host=null,$userName=null,$password=null,$database=null){
     $result=array();
-    $queryResult=$this->query($sql,$database);
+    $queryResult=$this->query($sql,$host,$userName,$password,$database);
     return $this->convertQueryResultToList($queryResult);
   }
 
-  public function getRowQuery($sql,$database){
-    $queryResult=$this->query($sql,$database);
+  public function getRowQuery($sql,$host=null,$userName=null,$password=null,$database=null){
+    $queryResult=$this->query($sql,$host,$userName,$password,$database);
     if($row = $this->fetchArray($queryResult)){
   		//return $this->convertArrayToData($row);
       return $row;
