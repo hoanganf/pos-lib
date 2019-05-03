@@ -11,6 +11,9 @@ define('E_DELETE_FAILT',305);
 define('E_NO_LOGIN',306);
 define('E_NO_PRODUCT',307);
 define('E_NO_INGREDIENT',308);
+define('E_NO_COMMENT',309);
+define('E_NO_RESTAURANT',310);
+define('E_NO_PRODUCT_RECIPE',311);
 /**FILE ***/
 define('E_FILE_NOT_IMAGE',1001);
 define('E_FILE_TOO_LARGE',1002);

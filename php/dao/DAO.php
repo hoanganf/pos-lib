@@ -1,6 +1,6 @@
 <?php
 class DAO{
-  private $connection=null;
+  protected $connection=null;
   function connect(){
     if($this->connection==null){
       $args = func_get_args();
@@ -81,8 +81,22 @@ class DAO{
   }
 
   public function close(){
-  	mysqli_close($this->connection);
-    $this->connection=null;
+  	if($this->connection!==null){
+      mysqli_close($this->connection);
+      $this->connection=null;
+    }
+  }
+
+  public function commit(){
+    if($this->connection!==null) mysqli_commit($this->connection);
+  }
+
+  public function rollBack(){
+  	if($this->connection!==null) mysqli_rollback($this->connection);
+  }
+
+  public function setAutoCommit($status=TRUE){
+  	if($this->connection!==null) mysqli_autocommit($this->connection,$status);
   }
 
   public function fetchArray($queryResult){

@@ -8,16 +8,14 @@ abstract class ResponseGetter extends Login{
       $request->access_token=$_COOKIE['pos_access_token'];
       $loginResult=json_decode($this->login($request));
       if(!$loginResult->status){
-        echo self::createResponse("false",E_NO_LOGIN,'AccessDenied.');
-        return;
+        return self::createResponse("false",E_NO_LOGIN,'AccessDenied.');
       }
     }else{
-      echo self::createResponse("false",E_NO_LOGIN,'AccessDenied.');
-      return;
+      return self::createResponse("false",E_NO_LOGIN,'AccessDenied.');
     }
     $request->user_name=$loginResult->user_name;
     $request->role=$loginResult->role;
-    $this->buildResponse($pageId,$request);
+    return $this->buildResponse($pageId,$request);
 
   }
   public abstract function buildResponse($pageId,$request);

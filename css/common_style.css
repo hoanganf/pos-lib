@@ -76,43 +76,6 @@ input[type=file]{
 textarea{
   min-height: 100px;
 }
-/* ----------------- BASE STYLE ------------------- */
-/** MARGIN */
-.margin{margin: 5px};
-.margin--right{margin-right: 5px;}
-.margin--left{margin-left: 5px;}
-.margin--top{margin-top: 5px;}
-.margin--bottom{margin-bottom: 5px;}
-/* PADDING*/
-.padding{padding: 5px};
-.padding--right{padding-right: 5px;}
-.padding--left{padding-left: 5px;}
-.padding--top{padding-top: 5px;}
-.padding--bottom{padding-bottom: 5px;}
-.padding--bottom--15{padding-bottom: 15px;}
-.padding--10{padding: 10px;}
-.padding--left-20{padding-left: 20px;}
-/* float*/
-.float--right{float: right};
-.float--left{float: left;}
-/* clear both */
-.float--right::after{
-  clear: both;
-}
-/* font size */
-.font-size--normal{
-  font-size: 17px;
-}
-.font-size--big{
-  font-size: 22px;
-}
-.font-size--small{
-  font-size: 12px;
-}
-/* resize */
-.resize--vertical{
-  resize: vertical;
-}
 
 /* rounded right */
 .button--right-rounded {
@@ -127,102 +90,6 @@ textarea{
   cursor: pointer;
   width: auto;
 }
-/*rounded all*/
-.rounded{
-  border-radius:5px;
-}
-
-/*Backgroud*/
-.background-color--green{
-  background-color:#65c778;
-  color:white;
-}
-.background-color--yellow{
-  background-color:#FFD300;
-  color:white;
-}
-.background-color--gray{
-  background-color:grey;
-  color:white;
-}
-.background-color--lightgray{
-  background-color:#f2f2f2;
-}
-.background-color--red{
-  background-color:red;
-}
-.background-color--white{
-  background-color:white;
-}
-.background-color--blue{
-  background-color:#5b9eee;
-  color: white;
-}
-.white-space--nowrap{
-  white-space: nowrap;
-}
-.text-align--right{
-  text-align: right;
-}
-.text-align--center{
-  text-align: center;
-}
-.text-align--left{
-  text-align: left;
-}
-.color--gray{
-  color: #333;
-}
-.color--blue{
-  color: #2196F3;
-}
-.width--auto{
-  width: auto;
-}
-.width--full{
-  width: 100%;
-}
-
-/** HEIGHT */
-.height--auto{
-  height: auto;
-}
-
-.display--inline-block{
-  display: inline-block;
-}
-.display--block{
-  display: block;
-}
-.display--flex{
-  display: flex;
-}
-.flex-direction--row{
-  flex-direction: row;
-}
-.flex-wrap--nowrap{
-  flex-wrap: nowrap;
-}
-
-.border--gray{
-  border: 1px solid #ccc;
-}
-
-/* POSITION*/
-.sticky--bottom{
-  position: -webkit-sticky;
-  position: sticky;
-  bottom:0;
-}
-.fixed--bottom{
-  position: fixed;
-  bottom:0;
-}
-.position--relative{
-  position: relative;
-}
-
-/*TABLE*/
 /*scroll menu*/
 .scroll-menu {
   overflow: auto;
@@ -241,6 +108,7 @@ textarea{
 *:disabled,
 *[disabled]{
   opacity: 0.5;
+  cursor: not-allowed;
 }
 /*title*/
 .scroll-menu *.active {
@@ -603,7 +471,212 @@ toggle button
 }
 
 /*****----------- ROW WITH TWO COLUMN ------------*********/
+/***-------------------CHECK BOX-----------------------------****/
+/* The checkbox-square */
+.checkbox-square {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* Hide the browser's default checkbox */
+.checkbox-square input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox-square__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-square:hover input ~ .checkbox-square__checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-square input:checked ~ .checkbox-square__checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-square__checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-square input:checked ~ .checkbox-square__checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-square .checkbox-square__checkmark:after {
+  left: 6px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* ----------------- BASE STYLE ------------------- */
+/** MARGIN */
+.margin{margin: 5px};
+.margin--right{margin-right: 5px;}
+.margin--left{margin-left: 5px;}
+.margin--top{margin-top: 5px;}
+.margin--bottom{margin-bottom: 5px;}
+/* PADDING*/
+.padding{padding: 5px};
+.padding--right{padding-right: 5px;}
+.padding--left{padding-left: 5px;}
+.padding--top{padding-top: 5px;}
+.padding--bottom{padding-bottom: 5px;}
+.padding--bottom--15{padding-bottom: 15px;}
+.padding--10{padding: 10px;}
+.padding--left-20{padding-left: 20px;}
+/*rounded all*/
+.rounded{
+  border-radius:5px;
+}
+
+/*Backgroud*/
+.background-color--green{
+  background-color:#65c778;
+  color:white;
+}
+.background-color--yellow{
+  background-color:#FFD300;
+  color:white;
+}
+.background-color--gray{
+  background-color:grey;
+  color:white;
+}
+.background-color--lightgray{
+  background-color:#f2f2f2;
+}
+.background-color--red{
+  background-color:red;
+}
+.background-color--white{
+  background-color:white;
+}
+.background-color--blue{
+  background-color:#5b9eee;
+  color: white;
+}
+.white-space--nowrap{
+  white-space: nowrap;
+}
+.text-align--right{
+  text-align: right;
+}
+.text-align--center{
+  text-align: center;
+}
+.text-align--left{
+  text-align: left;
+}
+.color--gray{
+  color: #333;
+}
+.color--blue{
+  color: #2196F3;
+}
+.min-height{
+  min-height: 35px;
+}
+.width--auto{
+  width: auto;
+}
+.width--full{
+  width: 100%;
+}
+
+/** HEIGHT */
+.height--auto{
+  height: auto;
+}
+
+.display--inline-block{
+  display: inline-block;
+}
+.display--block{
+  display: block;
+}
+.display--flex{
+  display: flex;
+}
+.flex-direction--row{
+  flex-direction: row;
+}
+.flex-wrap--nowrap{
+  flex-wrap: nowrap;
+}
+
+.border--gray{
+  border: 1px solid #ccc;
+}
+
+/* POSITION*/
+.sticky--bottom{
+  position: -webkit-sticky;
+  position: sticky;
+  bottom:0;
+}
+.fixed--bottom{
+  position: fixed;
+  bottom:0;
+}
+.position--relative{
+  position: relative;
+}
+/* float*/
+.float--right{float: right};
+.float--left{float: left;}
+/* clear both */
+.float--right::after{
+  clear: both;
+}
+/* font size */
+.font-size--normal{
+  font-size: 17px;
+}
+.font-size--big{
+  font-size: 22px;
+}
+.font-size--small{
+  font-size: 12px;
+}
+/* resize */
+.resize--vertical{
+  resize: vertical;
+}
+
+.display--none, .hide{
+  display: none;
+}
+/***-------------------CHECK BOX-----------------------------****/
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
   .modal-dialog__content__button {
