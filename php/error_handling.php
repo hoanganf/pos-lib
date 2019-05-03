@@ -14,6 +14,7 @@ define('E_NO_INGREDIENT',308);
 define('E_NO_COMMENT',309);
 define('E_NO_RESTAURANT',310);
 define('E_NO_PRODUCT_RECIPE',311);
+define('E_NO_TABLE',312);
 /**FILE ***/
 define('E_FILE_NOT_IMAGE',1001);
 define('E_FILE_TOO_LARGE',1002);
