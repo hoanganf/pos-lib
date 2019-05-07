@@ -4,8 +4,8 @@ abstract class ResponseGetter extends Login{
   public function get($pageId){
     $loginResult=null;
     $request=new Data();
-    if(isset($_COOKIE['pos_access_token'])){
-      $request->access_token=$_COOKIE['pos_access_token'];
+    if(isset($_COOKIE[TOKEN])){
+      $request->access_token=$_COOKIE[TOKEN];
       $loginResult=json_decode($this->login($request));
       if(!$loginResult->status){
         return self::createResponse("false",E_NO_LOGIN,'AccessDenied.');

@@ -2,9 +2,9 @@
 	abstract class PageGetter extends Login{
 		public function get($pageId){
 			$loginResult=null;
-			if(isset($_COOKIE['pos_access_token'])){
+			if(isset($_COOKIE[TOKEN])){
 				$request=new Data();
-				$request->access_token=$_COOKIE['pos_access_token'];
+				$request->access_token=$_COOKIE[TOKEN];
 				$loginResult=json_decode($this->login($request));
 				if(!$loginResult->status){
 					$this->redirect(LOGIN_DIR.'?from='.$_SERVER['REQUEST_URI']);

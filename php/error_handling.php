@@ -1,5 +1,6 @@
 <?php
 define('RESPONSE_MESSAGE','{"status":%s,"code":%s,"message":"%s"}');
+define('TOKEN','pos_access_token');
 define('SUCCEED',200);
 define('E_BAD_REQUEST',404);
 define('E_NO_ORDER',300);
@@ -27,6 +28,9 @@ function toLog($code,$err_message='',$errfile='', $errline='', $errcontext=''){
   $message .= "Error: [".$code."], "."$err_message in $errfile on line $errline, ";
   $message .= "Variables:".print_r($errcontext,true)."\r\n";
   error_log($message, 3, LOG_DIR."error_log.log");
+}
+function toJson($status,$code,$message){
+  return sprintf(RESPONSE_MESSAGE,$status,$code,$message);
 }
 function errorToJson($code,$err_message='',$errfile='', $errline='', $errcontext=''){
   toLog($code,$err_message,$errfile, $errline, $errcontext);
@@ -59,5 +63,36 @@ function errorRedirect($code,$err_message='',$errfile='', $errline='', $errconte
   }
   include LIB_DIR.'php/error.php';
   die();
+}
+function getApiDataCurl($url){
+    $option = [
+        CURLOPT_RETURNTRANSFER => true, //文字列として返す
+        CURLOPT_TIMEOUT        => 3, // タイムアウト時間
+        CURLOPT_COOKIE => TOKEN.'='.$_COOKIE[TOKEN]
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, $option);
+
+    $json    = curl_exec($ch);
+    $info    = curl_getinfo($ch);
+    $errorNo = curl_errno($ch);
+
+    // OK以外はエラーなので空白配列を返す
+    if ($errorNo !== CURLE_OK) {
+        // 詳しくエラーハンドリングしたい場合はerrorNoで確認
+        // タイムアウトの場合はCURLE_OPERATION_TIMEDOUT
+        return [];
+    }
+
+    // 200以外のステータスコードは失敗とみなし空配列を返す
+    if ($info['http_code'] !== 200) {
+        return [];
+    }
+
+    // 文字列から変換
+    $jsonArray = json_decode($json, true);
+
+    return $jsonArray;
 }
 ?>

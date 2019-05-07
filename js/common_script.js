@@ -70,9 +70,12 @@ function uploadImageChange(elem){
   formData.append("fileToUpload", $this.prop('files')[0]);
   formData.append("folder", $this.data('folder').length > 0 ? $this.data('folder') : 'pos');
   $.ajax({
-      url: "../pos-upload/paste.php",
+      url: window.imageUrl+"paste.php",
       type: "POST",
       data : formData,
+      xhrFields: {
+        withCredentials: true
+      },
       processData: false,
       contentType: false,
       beforeSend: function(xhr) {
@@ -83,9 +86,15 @@ function uploadImageChange(elem){
         $('.loader').css('display','none');
         $('#label_image').css('display','inline-block');
         console.log(response);
-        var jsonResponse=JSON.parse(response);
+        var jsonResponse=null;
+        try {
+           jsonResponse=JSON.parse(response);
+           //must be valid JSON
+        } catch(e) {
+            jsonResponse=response//must not be valid JSON
+        }
         if(jsonResponse.status === true){
-          $('img[name=image_displayer]').attr('src','../pos-upload/'+jsonResponse.file_path);
+          $('img[name=image_displayer]').attr('src',window.imageUrl+jsonResponse.file_path);
           $('input[name=image]').val(jsonResponse.file_path);
         }else{
           if(jsonResponse.code == 306) location.href='../login?from='+location.href;
